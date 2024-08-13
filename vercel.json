@@ -1,0 +1,37 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "weather_app/wsgi.py",
+        "use": "@vercel/python",
+        "config": {
+          "maxLambdaSize": "50mb"
+        }
+      }
+    ],
+    "routes": [
+      {
+        "src": "/static/(.*)",
+        "dest": "/static/$1",
+        "headers": {
+          "cache-control": "max-age=3600"
+        }
+      },
+      {
+        "src": "/media/(.*)",
+        "dest": "/media/$1",
+        "headers": {
+          "cache-control": "max-age=3600"
+        }
+      },
+      {
+        "src": "/(.*)",
+        "dest": "weather_app/wsgi.py"
+      }
+    ],
+    "env": {
+      "DJANGO_SETTINGS_MODULE": "weather_app.settings",
+      "API_KEY": "c49aff1a2ba24e338777dc0929ef3f6d"
+    }
+  }
+  
