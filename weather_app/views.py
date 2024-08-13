@@ -1,10 +1,9 @@
 from django.shortcuts import render
 import requests
 import datetime
-from decouple import config
 
 def index(request):
-    API_KEY = config('API_KEY')
+    API_KEY = "c49aff1a2ba24e338777dc0929ef3f6d"
     # Weatherbit API endpoints
     current_weather_url = "https://api.weatherbit.io/v2.0/current?city={}&key={}"
     forecast_url = "https://api.weatherbit.io/v2.0/forecast/daily?city={}&key={}&days=5"
@@ -54,7 +53,7 @@ def fetch_weather_and_forecast(city, api_key, current_weather_url, forecast_url)
                 "min_temp": daily_data['min_temp'],
                 "max_temp": daily_data['max_temp'],
                 "description": daily_data['weather']['description'],
-                "icon": f"https://www.weatherbit.io/static/img/icons/{daily_data['weather']['icon']}.png"
+                "icon": daily_data['weather']['icon']
             }
         )
     return weather_data, daily_forecast
